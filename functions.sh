@@ -10,8 +10,14 @@ default_cmd_die() {
     exit 1
 }
 
+verbose_cmd_die() {
+    echo "$(realpath -s "${BASH_SOURCE[0]}"): cmd failed '$@'" >&2
+    exit 1
+}
+
 cmd_die() {
-    default_cmd_die "$@"
+    #default_cmd_die "$@"
+    verbose_cmd_die "$@"
 }
 
 default_cmd_do_nonfatal() {
@@ -25,10 +31,6 @@ cmd_do_nonfatal() {
 
 cmd_do() {
     cmd_do_nonfatal "$@" || cmd_die
-}
-
-cmd_do() {
-    eval "$@" || { echo "$(realpath -s "${BASH_SOURCE[0]}"): cmd failed '$@'" >&2; exit 1; }
 }
 
 log_err() {

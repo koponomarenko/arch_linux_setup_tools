@@ -17,8 +17,8 @@ disk="${1}"
 cmd_do parted ${disk} mklabel gpt
 
 # /efi (/boot, /boot/efi)
-cmd_do parted ${disk}1 mkpart primary fat32 1MiB 551MiB
-cmd_do parted ${disk}1 set 1 esp on
+cmd_do parted ${disk} mkpart primary fat32 1MiB 551MiB
+cmd_do parted ${disk} set 1 esp on
 
 # /root
-cmd_do parted ${disk}2 mkpart primary ext4 551MiB 100%
+cmd_do parted ${disk} mkpart primary ext4 551MiB 100%

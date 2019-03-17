@@ -18,18 +18,28 @@
 while [[ $# -gt 0 ]]; do
     key="${1}"
     case ${key} in
-        --sys-disk)
+        -d|--sys-disk)
             system_disk="${2}"
             shift # past argument
             shift # past value
             ;;
-        --hostname)
+        -h|--hostname)
             hostname="${2}"
             shift # past argument
             shift # past value
             ;;
-        --cpu-manufacturer)
+        -c|--cpu-manufacturer)
             cpu_manufacturer="${2}"
+            shift # past argument
+            shift # past value
+            ;;
+        -s|--stage)
+            stage="${2}"
+            shift # past argument
+            shift # past value
+            ;;
+        -u|--user)
+            user="${2}"
             shift # past argument
             shift # past value
             ;;
@@ -39,12 +49,16 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-[ -n "${system_disk}" ] || { log_err "'--sys-disk' must be set"; exit 1; }
-[ -n "${hostname}" ] || { log_err "'--hostname' must be set"; exit 1; }
-[ -n "${cpu_manufacturer}" ] || { log_err "'--cpu-manufacturer' must be set"; exit 1; }
+[ -n "${system_disk}" ] || { log_err "'-d|--sys-disk' must be set"; exit 1; }
+[ -n "${hostname}" ] || { log_err "'-h|--hostname' must be set"; exit 1; }
+[ -n "${cpu_manufacturer}" ] || { log_err "'-c|--cpu-manufacturer' must be set"; exit 1; }
+[ -n "${stage}" ] || { log_err "'-s|--stage' must be set"; exit 1; }
+[ -n "${user}" ] || { log_err "'-u|--user' must be set"; exit 1; }
 #TODO: maybe show general help/example on any error.
 
-scripts=(
+scripts_dir="$(dirname $(realpath "${BASH_SOURCE[0]}"))"
+
+scripts_before_chroot=(
 ### basic installation
 # Pre-installation
 010_verify_the_boot_mode.sh
@@ -58,7 +72,11 @@ scripts=(
 080_install_the_base_packages.sh
 # Configure the system
 090_generate_fstab.sh
+"095_copy_these_scripts_to_the_new_system.sh ${scripts_dir}"
 100_chroot_into_the_new_system.sh
+)
+
+scripts_in_chroot=(
 110_set_the_time_zone.sh
 120_set_localization.sh
 "130_network_configuration.sh ${hostname}"
@@ -70,6 +88,21 @@ scripts=(
 ### post-installation
 )
 
-for i in "${scripts[@]}"; do
-    echo "${i}"
-done
+case ${stage} in
+    basic-install)
+        for i in "${scripts_before_chroot[@]}"; do
+            echo "${i}"
+            cmd_do ./${i}
+        done
+        ;;
+    basic-config)
+        for i in "${scripts_in_chroot[@]}"; do
+            echo "${i}"
+            cmd_do ./${i}
+        done
+        ;;
+    *) # unknown option
+        echo "'--stage' is required [basic-install|basic-config]"
+        exit 1
+        ;;
+esac

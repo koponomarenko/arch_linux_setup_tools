@@ -1,5 +1,6 @@
 #!/bin/bash
 . functions.sh
+. packages.sh
 
 if [ -z "${1}" ]; then
     log_err "What hostname to use for the system?"
@@ -22,5 +23,5 @@ cmd_do 'cat >/etc/hosts <<EOF
 EOF'
 
 # Complete the network configuration for the new system
-cmd_do pacman -Syu --noconfirm --needed networkmanager
+cmd_do pacman -Syu --noconfirm --needed ${network_pkgs[@]}
 systemctl enable NetworkManager.service

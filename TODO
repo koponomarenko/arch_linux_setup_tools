@@ -1,3 +1,4 @@
 - Configure fonts (UI, Linux console)
 - Disable MAC address randomization in NetworkManager.
     https://blogs.gnome.org/thaller/2016/08/26/mac-address-spoofing-in-networkmanager-1-4-0/
+- maybe put a checker in every script which must be called from superuser, to check if root user.

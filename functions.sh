@@ -11,7 +11,7 @@ default_cmd_die() {
 }
 
 verbose_cmd_die() {
-    echo "$(realpath -s "${BASH_SOURCE[0]}"): cmd failed '$@'" >&2
+    echo "  ERROR: [$(basename -- "${0}")] cmd failed '$@'" >&2
     exit 1
 }
 
@@ -30,9 +30,9 @@ cmd_do_nonfatal() {
 }
 
 cmd_do() {
-    cmd_do_nonfatal "$@" || cmd_die
+    cmd_do_nonfatal "$@" || cmd_die "$@"
 }
 
 log_err() {
-    echo "$(realpath -s "${BASH_SOURCE[0]}"): $@" >&2
+    echo "  ERROR: [$(basename -- "${0}")] $@" >&2
 }

@@ -14,7 +14,7 @@ cmd_do pacman -Qi grub >/dev/null
 
 if [[ "${cpu_manufacturer}" == "intel" ]]; then
     # Install microcode updates for intel cpu
-    cmd_do pacman -Syu --noconfirm intel-ucode
+    cmd_do pacman -Syu --noconfirm --needed intel-ucode
 else
     log_err "Unknown processor manufacturer"
     exit 1

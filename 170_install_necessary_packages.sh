@@ -7,6 +7,7 @@ pkgs=(
     base-devel
     bash-completion
     vim
+    sudo
 
     python
     python2
@@ -14,4 +15,4 @@ pkgs=(
     parted
 )
 
-cmd_do pacman -Syu --noconfirm ${pkgs[@]}
+cmd_do pacman -Syu --noconfirm --needed ${pkgs[@]}

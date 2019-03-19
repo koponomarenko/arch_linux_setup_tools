@@ -1,0 +1,3 @@
+- Configure fonts (UI, Linux console)
+- Disable MAC address randomization in NetworkManager.
+    https://blogs.gnome.org/thaller/2016/08/26/mac-address-spoofing-in-networkmanager-1-4-0/

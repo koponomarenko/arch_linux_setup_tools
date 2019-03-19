@@ -15,13 +15,6 @@
 # init system: systemd
 # boot loader: GRUB
 
-#TODO: make pacman do not reinstall a package if it is already installed.
-#TODO: don't create a file system if it is already created. Just 'rm -rf' everything on it.
-#TODO: make error message more verbose for the small scripts, with examples,
-# so it is easy to use them as a standalone script.
-# 300_add_a_user.sh as an example.
-#TODO: check error messages output - if it works as intended.
-#TODO: maybe show general help/example on any error.
 
 show_help() {
     cat <<EOF
@@ -70,6 +63,7 @@ done
 
 scripts_dir="$(dirname $(realpath "${BASH_SOURCE[0]}"))"
 
+# before chroot
 basic_install_scripts=(
     ### basic installation
     # Pre-installation
@@ -88,6 +82,7 @@ basic_install_scripts=(
     100_chroot_into_the_new_system.sh
 )
 
+# in chroot
 basic_config_scripts=(
     # Configure the system
     110_set_the_time_zone.sh
@@ -100,10 +95,18 @@ basic_config_scripts=(
     180_set_the_root_password.sh
 )
 
+# after the first reboot
 full_config_scripts=(
     ### post-installation
     "300_add_a_user.sh ${user}"
+# add user to sudoers # add to wheel group and uncomment this group in the sudoers.
+# disable_root.sh
+
+# configure UI
     310_set_desktop_environment.sh
+#    install_packages.sh
+# some specific settings
+#   - 
 )
 
 case ${stage} in

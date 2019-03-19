@@ -22,5 +22,5 @@ cmd_do 'cat >/etc/hosts <<EOF
 EOF'
 
 # Complete the network configuration for the new system
-cmd_do pacman -Syu --noconfirm networkmanager
+cmd_do pacman -Syu --noconfirm --needed networkmanager
 systemctl enable NetworkManager.service

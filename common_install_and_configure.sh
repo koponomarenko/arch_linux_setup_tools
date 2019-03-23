@@ -53,14 +53,22 @@ install_pkgs() {
     cmd_do pacman -Syu --noconfirm --needed ${pkgs[@]}
 }
 
+mk_dest_config_dir() {
+    local dest_config_dir="${1}"
+    cmd_do mkdir -p "${dest_config_dir}"
+    cmd_do chown -c ${user}:${user} "${dest_config_dir}"
+    cmd_do chmod 700 "${dest_config_dir}"
+}
+
 copy_config_file() {
     local src_config_file="${1}"
     local dest_config_file="${2}"
     [ -n "${src_config_file}" ] || { log_err "'src_config_file' is not specified"; exit 1; }
     [ -f "${src_config_file}" ] || { log_err "'src_config_file' is not a file"; exit 1; }
     [ -n "${dest_config_file}" ] || { log_err "'dest_config_file' is not specified"; exit 1; }
-    [ -f "${dest_config_file}" ] || { log_err "'dest_config_file' is not a file"; exit 1; }
+
     cmd_do cp "${src_config_file}" "${dest_config_file}"
+    [ -f "${dest_config_file}" ] || { log_err "'dest_config_file' is not a file"; exit 1; }
     cmd_do chown -c ${user}:${user} "${dest_config_file}"
     cmd_do chmod 600 "${dest_config_file}"
 }

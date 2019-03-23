@@ -6,7 +6,10 @@ pkgs=(git)
 . common_install_and_configure.sh
 
 install_pkgs
-copy_config_file "${config_dir}/.gitconfig" "${user_dir}/.gitconfig"
+
+dest_config_dir="${user_config_dir}/git"
+mk_dest_config_dir "${dest_config_dir}"
+copy_config_file "${config_dir}/git/config" "${dest_config_dir}/config"
 
 # validate the config file
-cmd_do git config --list --file "${user_dir}/.gitconfig"
+cmd_do git config --list --file "${dest_config_dir}/config"

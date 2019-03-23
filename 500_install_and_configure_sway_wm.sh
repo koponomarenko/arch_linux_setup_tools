@@ -6,5 +6,4 @@ pkgs=(sway)
 . common_install_and_configure.sh
 
 install_pkgs
-#TODO: configure it
-#copy_config_file "${config_dir}/" "${user_dir}/."
+copy_config_file "${config_dir}/sway/config" "${user_config_dir}/sway/config"

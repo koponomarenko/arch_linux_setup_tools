@@ -21,23 +21,23 @@ necessary_pkgs=(
     pkgstats  # Submit a list of installed packages to the Arch Linux project
     pacman-contrib  # Contributed scripts and tools for pacman systems
     bash-completion
-    vim
     sudo
     base-devel
-
-    python
-    python2
-
     parted
 )
 
-gui_pkgs=(
-    gnome
-)
+python_pkgs=(python python2)
+urxvt_pkgs=(rxvt-unicode)
+
+git_pkgs=(git)
+qtcreator_pkgs=(qtcreator)
 
 other_pkgs=(
-    firefox
-    qtcreator
+    # screen vs tmux?
+    # tree
+    # feh
+    # zathura
+    neofetch
 )
 
 fonts_pkgs=(

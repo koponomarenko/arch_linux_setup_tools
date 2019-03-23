@@ -38,6 +38,8 @@ other_pkgs=(
     # feh
     # zathura
     neofetch
+    gnupg
+    openssh
 )
 
 fonts_pkgs=(

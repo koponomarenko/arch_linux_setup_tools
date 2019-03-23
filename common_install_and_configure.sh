@@ -46,7 +46,8 @@ done
 [ -n "${user}" ] || { log_err "'--user' is not set"; show_help; exit 1; }
 
 cmd_do which getent >/dev/null
-user_dir="$(cmd_do 'getent passwd ${user} | cut -d: -f6')"
+user_dir="$(cmd_do_silent 'getent passwd ${user} | cut -d: -f6')"
+user_config_dir="${user_dir}/.config" # $XDG_CONFIG_HOME (defaults to $HOME/.config)
 
 install_pkgs() {
     cmd_do pacman -Syu --noconfirm --needed ${pkgs[@]}
@@ -56,7 +57,10 @@ copy_config_file() {
     local src_config_file="${1}"
     local dest_config_file="${2}"
     [ -n "${src_config_file}" ] || { log_err "'src_config_file' is not specified"; exit 1; }
+    [ -f "${src_config_file}" ] || { log_err "'src_config_file' is not a file"; exit 1; }
     [ -n "${dest_config_file}" ] || { log_err "'dest_config_file' is not specified"; exit 1; }
+    [ -f "${dest_config_file}" ] || { log_err "'dest_config_file' is not a file"; exit 1; }
     cmd_do cp "${src_config_file}" "${dest_config_file}"
     cmd_do chown -c ${user}:${user} "${dest_config_file}"
+    cmd_do chmod 600 "${dest_config_file}"
 }

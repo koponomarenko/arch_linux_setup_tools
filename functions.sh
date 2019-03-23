@@ -33,6 +33,10 @@ cmd_do() {
     cmd_do_nonfatal "$@" || cmd_die "$@"
 }
 
+cmd_do_silent() {
+    eval "$@" || cmd_die "$@"
+}
+
 log_err() {
     echo "  ERROR: [$(basename -- "${0}")] $@" >&2
 }

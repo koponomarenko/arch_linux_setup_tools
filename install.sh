@@ -29,6 +29,7 @@ OPTIONS:
 -h|--hostname           Hostname for the new system.
 -c|--cpu-manufacturer   CPU manufacturer [intel].
 -u|--user               Username for a user on the new system.
+-p|--print-pkgs         Show packages which whould be installed.
 EOF
 }
 
@@ -66,6 +67,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 scripts_dir="$(dirname $(realpath "${BASH_SOURCE[0]}"))"
+config_dir="${scripts_dir}/config"
 
 # before chroot
 basic_install_scripts=(
@@ -99,9 +101,8 @@ final_config_scripts=(
     305_setup_sudoers.sh
     "310_create_a_user.sh ${user}"
     320_disable_root_login.sh
-    330_set_desktop_environment.sh
-    340_set_fonts.sh
-#    400_install_other_packages.sh
+
+    "400_install_and_configure_vim.sh -c ${config_dir} -u ${user}"
 )
 
 case ${stage} in

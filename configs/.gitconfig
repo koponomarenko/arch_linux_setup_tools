@@ -1,0 +1,7 @@
+[user]
+	name = Kostiantyn Ponomarenko
+	email = konstantin.ponomarenko@gmail.com
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff

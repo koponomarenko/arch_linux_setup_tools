@@ -2,3 +2,7 @@
 - Disable MAC address randomization in NetworkManager.
     https://blogs.gnome.org/thaller/2016/08/26/mac-address-spoofing-in-networkmanager-1-4-0/
 - maybe put a checker in every script which must be called from superuser, to check if root user.
+
+- XDG Base Directory Specification
+    https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
+    https://wiki.archlinux.org/index.php/XDG_Base_Directory

@@ -6,3 +6,7 @@
 - XDG Base Directory Specification
     https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
     https://wiki.archlinux.org/index.php/XDG_Base_Directory
+
+- ssh daemon
+- ssh agent?
+    https://wiki.archlinux.org/index.php/SSH_keys

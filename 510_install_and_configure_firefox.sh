@@ -7,12 +7,12 @@ pkgs=(firefox)
 
 install_pkgs
 
-alias_dest_file="${user_dir}/.bashrc"
-firefox_wl_alias='alias firefox-wl="GDK_BACKEND=wayland firefox"'
-if ! grep -q "${firefox_wl_alias}" ${alias_dest_file}; then
-    cmd_do 'cat >>${alias_dest_file} <<EOF
-
-${firefox_wl_alias}
-
+#TODO: move this out of /usr/bin.
+firefox_wl="/usr/bin/firefox-wayland"
+if [ ! -f "${firefox_wl}" ]; then
+    cmd_do 'cat >${firefox_wl} <<EOF
+#!/bin/bash
+GDK_BACKEND=wayland firefox
 EOF'
+    chmod +x "${firefox_wl}"
 fi

@@ -6,6 +6,16 @@ pkgs=(
     dmenu #TODO: change for smth with Wayland support
     swaylock
     swayidle
+    mako # A lightweight Wayland notification daemon
+
+    grim # Screenshot utility that works under Wayland
+    slurp # Select a region in a Wayland compositor (works with grim)
+
+    light # Program to easily change brightness on backlight-controllers.
+
+    feh # Fast and light imlib2-based image viewer
+
+#   pulseaudio
 )
 
 

@@ -21,6 +21,12 @@ Show available networks and connect
 
 An alternative is `nmtui` - Text User Interface for controlling NetworkManager.
 
+### Sound/audio control
+
+Tags: `sound` `audio` `volume` `pulseaudio`
+
+`pavucontrol` is a GUI volume control tool ("mixer") for PulseAudio.
+
 ### Markdown Preview
 
 Tags: `markdown`

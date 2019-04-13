@@ -15,7 +15,8 @@ pkgs=(
 
     feh # Fast and light imlib2-based image viewer
 
-#   pulseaudio
+    pulseaudio # A featureful, general-purpose sound server.
+    pavucontrol # Simple GTK+ volume control tool ("mixer") for PulseAudio.
 )
 
 

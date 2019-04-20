@@ -1,7 +1,15 @@
 #!/bin/bash
 . common_helpers/functions.sh
 
-pkgs=(gedit)
+pkgs=(
+    # screen vs tmux?
+    # tree
+    # feh
+    # zathura
+    neofetch
+    gnupg
+    openssh
+)
 
 . common_helpers/common_install_and_configure.sh
 

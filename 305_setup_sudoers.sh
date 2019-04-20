@@ -1,5 +1,5 @@
 #!/bin/bash
-. functions.sh
+. common_helpers/functions.sh
 
 #TODO: Harden with Sudo Example:
 # https://wiki.archlinux.org/index.php/sudo#Harden_with_Sudo_Example

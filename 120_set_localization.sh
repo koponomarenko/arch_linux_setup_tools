@@ -1,5 +1,5 @@
 #!/bin/bash
-. functions.sh
+. common_helpers/functions.sh
 
 # Uncomment en_US.UTF-8 UTF-8 and other needed locales in /etc/locale.gen
 locale="en_US.UTF-8 UTF-8"

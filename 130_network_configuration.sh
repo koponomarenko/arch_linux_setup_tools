@@ -1,6 +1,5 @@
 #!/bin/bash
-. functions.sh
-. packages.sh
+. common_helpers/functions.sh
 
 if [ -z "${1}" ]; then
     log_err "What hostname to use for the system?"
@@ -9,6 +8,10 @@ fi
 
 # hostname="xyz"
 hostname="${1}"
+
+network_pkgs=(
+    networkmanager
+)
 
 # Create the hostname file
 cmd_do 'cat >/etc/hostname <<EOF

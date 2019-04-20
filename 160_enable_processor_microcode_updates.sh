@@ -1,6 +1,5 @@
 #!/bin/bash
-. functions.sh
-. packages.sh
+. common_helpers/functions.sh
 
 if [ -z "${1}" ]; then
     log_err "Who is the processor manufacturer for a CPU on this system?"
@@ -10,7 +9,11 @@ fi
 # ${1} == intel
 cpu_manufacturer="${1}"
 
-# Assume GRUB boot loader is used.
+intel_microcode_pkgs=(
+    intel-ucode
+)
+
+# Assume GRUB boot loader is used, exit ERROR if not.
 cmd_do pacman -Qi grub >/dev/null
 
 if [[ "${cpu_manufacturer}" == "intel" ]]; then

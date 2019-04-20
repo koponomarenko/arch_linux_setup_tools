@@ -5,6 +5,11 @@
 #TODO: must be executed with superuser rights, check for the rights.
 #TODO: use script params to pass username and pass to this script.
 
+printer_pkgs=(
+    cups
+    samba  # for shared printers
+)
+
 cmd_do pacman -Syu --noconfirm --needed ${printer_pkgs[@]}
 
 cmd_do systemctl enable org.cups.cupsd.service

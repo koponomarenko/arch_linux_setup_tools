@@ -1,5 +1,5 @@
 #!/bin/bash
-. functions.sh
+. common_helpers/functions.sh
 
 # Layout:
 # /boot      /dev/sda1   fat32   550 MiB

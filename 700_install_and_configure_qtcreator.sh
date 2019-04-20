@@ -1,9 +1,9 @@
 #!/bin/bash
-. functions.sh
+. common_helpers/functions.sh
 
 pkgs=(qtcreator)
 
-. common_install_and_configure.sh
+. common_helpers/common_install_and_configure.sh
 
 install_pkgs
 

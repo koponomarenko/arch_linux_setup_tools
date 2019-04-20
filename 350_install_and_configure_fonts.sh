@@ -1,5 +1,5 @@
 #!/bin/bash
-. functions.sh
+. common_helpers/functions.sh
 
 pkgs=(
     ttf-liberation # default
@@ -11,7 +11,7 @@ pkgs=(
     ttf-bitstream-vera
 )
 
-. common_install_and_configure.sh
+. common_helpers/common_install_and_configure.sh
 
 install_pkgs
 

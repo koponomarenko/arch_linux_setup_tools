@@ -1,8 +1,10 @@
 #!/bin/bash
-. functions.sh
-. packages.sh
+. common_helpers/functions.sh
 
-# Use GRUB as a boot loader
+boot_loader_pkgs=(
+    grub
+    efibootmgr
+)
 
 cmd_do pacman -Syu --noconfirm --needed ${boot_loader_pkgs[@]}
 cmd_do grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB

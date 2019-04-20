@@ -1,13 +1,11 @@
 #!/bin/bash
-. functions.sh
+. fcommon_helpers/unctions.sh
 
+# TODO: https only, reliable counrty / even reliable server
 
-# https ony
-# reliable counrty / even reliable server
+# TODO: check if the server synced 100%
 
-# check if the server synced 100%
-
-# How often server can be changed?
+# TODO: How often server can be changed?
 
 # Aim at 'upgrade only' - no downgrade. - pkglist on the server
 
@@ -15,8 +13,8 @@
 # 1. stability
 # 2. security
 
-# Question: can a mirror be compromised?
-# package signing?
+# TODO: can a mirror be compromised?
+# TODO: package signing?
 ### Possible solutions:
 # use Reflector
 # use preselected few mirrors and check their status before each update.

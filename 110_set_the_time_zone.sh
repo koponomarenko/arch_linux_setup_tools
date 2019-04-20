@@ -1,5 +1,5 @@
 #!/bin/bash
-. functions.sh
+. common_helpers/functions.sh
 
 cmd_do ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
 

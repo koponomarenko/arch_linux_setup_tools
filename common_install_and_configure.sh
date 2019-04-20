@@ -55,7 +55,10 @@ install_pkgs() {
 
 mk_dest_config_dir() {
     local dest_config_dir="${1}"
-    cmd_do mkdir -p "${dest_config_dir}"
+    if [ ! -d "${dest_config_dir}" ]; then
+        # don't use '-p' because can't chown them
+        cmd_do mkdir "${dest_config_dir}"
+    fi
     cmd_do chown -c ${user}:${user} "${dest_config_dir}"
     cmd_do chmod 700 "${dest_config_dir}"
 }

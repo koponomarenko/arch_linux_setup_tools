@@ -30,7 +30,6 @@ python_pkgs=(python python2)
 urxvt_pkgs=(rxvt-unicode)
 
 git_pkgs=(git)
-qtcreator_pkgs=(qtcreator)
 
 other_pkgs=(
     # screen vs tmux?

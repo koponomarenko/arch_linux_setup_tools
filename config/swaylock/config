@@ -1,0 +1,3 @@
+show-failed-attempts
+daemonize
+image=/opt/images/lock_screen_image.jpg

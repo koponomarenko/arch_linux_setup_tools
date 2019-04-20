@@ -7,12 +7,11 @@ pkgs=(firefox)
 
 install_pkgs
 
-#TODO: move this out of /usr/bin.
-firefox_wl="/usr/bin/firefox-wayland"
-if [ ! -f "${firefox_wl}" ]; then
-    cmd_do 'cat >${firefox_wl} <<EOF
-#!/bin/bash
-GDK_BACKEND=wayland firefox
+# Make Firefox use Wayland by default
+# TODO: maybe set "GDK_BACKEND=wayland" globally instead
+firefox_wayland="/usr/local/bin/firefox"
+cmd_do 'cat >${firefox_wayland} <<EOF
+#!/bin/sh
+GDK_BACKEND=wayland exec /usr/bin/firefox "\$@"
 EOF'
-    chmod +x "${firefox_wl}"
-fi
+cmd_do chmod +x "${firefox_wayland}"

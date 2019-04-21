@@ -24,7 +24,10 @@ inoremap <S-Tab> <C-d>
 " Allow to delete anything that was not typed during your current insert mode session
 set backspace=indent,eol,start
 
-" Color scheme (solarized)
-syntax enable
-set background=light
-colorscheme solarized
+" Only Termite configured to use solarized color scheme
+if $TERM == 'xterm-termite'
+    " Color scheme (solarized)
+    syntax enable
+    set background=light
+    colorscheme solarized
+endif

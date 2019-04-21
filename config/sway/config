@@ -14,10 +14,12 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term urxvt
+set $term termite
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
-set $menu dmenu_path | dmenu | xargs swaymsg exec
+#set $menu dmenu_path | dmenu | xargs swaymsg exec
+set $menu exec $term --name=sway_app_launcher -e sway_app_launcher
+for_window [app_id="^sway_app_launcher$"] floating enable, border pixel 1, resize set width 600 px height 200 px
 
 ### Output configuration
 #
@@ -207,9 +209,9 @@ bar {
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
     #status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
-    status_command i3status
+    #status_command i3status
     #status_command i3blocks
-    #status_command waybar
+    swaybar_command waybar
     # Required fonts: awesome-terminal-fonts
 
     colors {
@@ -225,6 +227,9 @@ bar {
 
 # notification daemon
 exec mako --ignore-timeout 1
+
+for_window [class="feh"] floating enable
+for_window [class="imv"] floating enable
 
 ### Output configuration
 #
@@ -277,6 +282,23 @@ bindsym XF86MonBrightnessUp exec light -A 5
 #bindsym --release Print exec grim -g \"$(slurp)" - | wl-copy
 bindsym --release Print exec grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
 bindsym --release Shift+Print exec grim -g "$(slurp)" $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
+
+# example:
+#   https://faq.i3wm.org/question/239/how-do-i-suspendlockscreen-and-logout.1.html
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Pause mode "$mode_system"
 
 
 include /etc/sway/config.d/*

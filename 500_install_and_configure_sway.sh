@@ -7,8 +7,6 @@ pkgs=(
     swaylock
     swayidle
 
-    
-
     mako # A lightweight Wayland notification daemon
 
     grim # Screenshot utility that works under Wayland
@@ -29,6 +27,12 @@ pkgs=(
 install_pkgs
 copy_config_file "${config_dir}/sway/config" "${user_config_dir}/sway/config"
 
+# Configure swaylock
 copy_config_file "${config_dir}/swaylock/config" "${user_config_dir}/swaylock/config"
 mkdir -p /opt/images/
 cp images/* /opt/images/.
+
+# Configure app launcher
+sway_app_launcher="/usr/local/bin/sway_app_launcher"
+cmd_do cp tools/sway_app_launcher ${sway_app_launcher}
+cmd_do chmod +x ${sway_app_launcher}

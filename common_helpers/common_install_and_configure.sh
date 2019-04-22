@@ -1,5 +1,6 @@
 #!/bin/bash
-. functions.sh
+
+. ${root_dir}/common_helpers/functions.sh
 
 set -o pipefail
 
@@ -8,12 +9,11 @@ show_help() {
     cat <<EOF
 ${script_name} OPTIONS
 
-${script_name} -c <config-dir> -u <user>
+${script_name} -u <user>
 ${script_name} -p
 
 OPTIONS:
--c|--config-dir         Directory from which the config must be taken.
--u|--user               Username for a user on the new system.
+-u|--user               Username of a target user on the system.
 -p|--print-pkgs         Show packages which whould be installed.
 EOF
 }
@@ -21,18 +21,13 @@ EOF
 while [[ $# -gt 0 ]]; do
     key="${1}"
     case ${key} in
-        -c|--config-dir)
-            config_dir="${2}"
-            shift # past argument
-            shift # past value
-            ;;
         -u|--user)
             user="${2}"
             shift # past argument
             shift # past value
             ;;
         -p|--print-pkgs)
-            print_pkgs="1"
+            print_pkgs="yes"
             shift # past argument
             ;;
         *) # unknown option
@@ -41,19 +36,22 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-[ -z "${print_pkgs}" ] || { echo ${pkgs[@]}; exit 0; }
-[ -n "${config_dir}" ] || { log_err "'--config-dir' is not set"; show_help; exit 1; }
-[ -n "${user}" ] || { log_err "'--user' is not set"; show_help; exit 1; }
+check_if_user_is_set() {
+    [ -n "${user}" ] || { log_err "'--user' is not set"; show_help; exit 1; }
+}
 
 cmd_do which getent >/dev/null
 user_dir="$(cmd_do_silent 'getent passwd ${user} | cut -d: -f6')"
 user_config_dir="${user_dir}/.config" # $XDG_CONFIG_HOME (defaults to $HOME/.config)
 
 install_pkgs() {
+    local pkgs=("$@")
+    [[ "${print_pkgs}" == "yes" ]] && { echo ${pkgs[@]}; exit 0; }
     cmd_do pacman -Syu --noconfirm --needed ${pkgs[@]}
 }
 
 mk_dest_config_dir() {
+    check_if_user_is_set
     local dest_config_dir="${1}"
     if [ ! -d "${dest_config_dir}" ]; then
         # don't use '-p' because can't chown them
@@ -64,6 +62,7 @@ mk_dest_config_dir() {
 }
 
 copy_config_file() {
+    check_if_user_is_set
     local src_config_file="${1}"
     local dest_config_file="${2}"
     [ -n "${src_config_file}" ] || { log_err "'src_config_file' is not specified"; exit 1; }

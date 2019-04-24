@@ -3,13 +3,11 @@
 . ${root_dir}/common_helpers/functions.sh
 . ${root_dir}/common_helpers/common_install.sh
 
-if [ -z "${1}" ]; then
-    log_err "What hostname to use for the system?"
+if [ -z "${hostname}" ]; then
+    log_err "A hostname to use for the new system is not set!"
+    log_err "Set it with \"export hostname=<hostname>\""
     exit 1
 fi
-
-# hostname="xyz"
-hostname="${1}"
 
 pkgs=(
     networkmanager

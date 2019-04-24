@@ -3,13 +3,17 @@
 . ${root_dir}/common_helpers/functions.sh
 . ${root_dir}/common_helpers/common_install.sh
 
-if [ -z "${1}" ]; then
-    log_err "Who is the processor manufacturer for a CPU on this system?"
-    exit 1
+if cat /proc/cpuinfo | grep -q AMD; then
+    cpu_manufacturer="amd"
+elif cat /proc/cpuinfo | grep -q Intel; then
+    cpu_manufacturer="intel"
 fi
 
-# ${1} == intel
-cpu_manufacturer="${1}"
+if [ -z "${cpu_manufacturer}" ]; then
+    log_err "A processor manufacturer is not set!"
+    log_err "Set it with \"export cpu_manufacturer=<amd|intel>\""
+    exit 1
+fi
 
 amd_microcode_pkgs=(
     amd-ucode

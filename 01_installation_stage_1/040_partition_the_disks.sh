@@ -6,13 +6,11 @@
 # /boot      /dev/sda1   fat32   550 MiB
 # /          /dev/sda2   ext4    Rest of the space
 
-if [ -z "${1}" ]; then
-    log_err "What disk (/dev/sdX) to use for the system?"
+if [[ ${disk} != /dev/* ]]; then
+    log_err "A disk to use for the new system installation is not set!"
+    log_err "Set it with \"export disk=/dev/<disk>\""
     exit 1
 fi
-
-# ${1} == /dev/sda
-disk="${1}"
 
 # GPT
 cmd_do parted ${disk} mklabel gpt

@@ -10,6 +10,7 @@ pkgs=(
     # zathura
     # neofetch
     # gnupg
+    # ranger
 )
 
 install_pkgs "${pkgs[@]}"

@@ -25,11 +25,13 @@ pkgs=(
 
 install_pkgs "${pkgs[@]}"
 
-mk_dest_config_dir ${config_dir}/sway
-copy_config_file "${config_dir}/sway/config" "${user_config_dir}/sway/config"
+mk_dest_config_dir ${user_config_dir}/sway
+mk_dest_config_dir ${user_config_dir}/sway/config.d
+
+copy_config_file "${sway_wm_config_dir}/sway/config" "${user_config_dir}/sway/config"
 
 # Configure swaylock
-copy_config_file "${config_dir}/swaylock/config" "${user_config_dir}/swaylock/config"
+copy_config_file "${sway_wm_config_dir}/swaylock/config" "${user_config_dir}/swaylock/config"
 mkdir -p /opt/images/
 cp images/* /opt/images/.
 

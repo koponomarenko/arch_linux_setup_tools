@@ -8,3 +8,4 @@ this_script_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
 
 export root_dir="${this_script_dir}"
 export config_dir=${root_dir}/config
+export sway_wm_config_dir=${root_dir}/04_sway_wm/config

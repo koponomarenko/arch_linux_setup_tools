@@ -27,13 +27,28 @@ Options are set using environment variables.
 
 To print all packages without installing them, set `export print_pkgs=yes`.
 
-### HiDPI
+### HiDPI boot
 
 The Arch Linux ISO uses systemd-boot, so you can hit “e” when the menu appears and append
 parameters to the kernel line (or at the very end). Setting only this one should do the work:
 
     video=1280x720
 
+### Set up WiFi
+
+https://wiki.archlinux.org/index.php/WPA_supplicant#Connecting_with_wpa_passphrase
+
+Connect to the network
+
+    wpa_supplicant -i <interface> -c <(wpa_passphrase MYSSID passphrase)
+
+Then start dhcpcd for the interface
+
+    systemctl start dhcpcd@<interface>.service
+
+### Getting those tools
+
+    curl -L https://github.com/koponomarenko/arch_linux_setup_tools/archive/master.tar.gz | tar zx
 
 ---
 ## Some useful tips for a day to day work

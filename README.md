@@ -27,6 +27,14 @@ Options are set using environment variables.
 
 To print all packages without installing them, set `export print_pkgs=yes`.
 
+### HiDPI
+
+The Arch Linux ISO uses systemd-boot, so you can hit “e” when the menu appears and append
+parameters to the kernel line (or at the very end). Setting only this one should do the work:
+
+    video=1280x720
+
+
 ---
 ## Some useful tips for a day to day work
 

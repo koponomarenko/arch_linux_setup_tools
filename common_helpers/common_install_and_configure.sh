@@ -18,6 +18,8 @@ OPTIONS:
 EOF
 }
 
+user=${target_user}
+
 while [[ $# -gt 0 ]]; do
     key="${1}"
     case ${key} in

@@ -2,13 +2,12 @@
 
 . ${root_dir}/common_helpers/functions.sh
 
-if [ -z "${1}" ]; then
-    log_err "What username to use for the system?"
-    exit 1
+if [ -z "${target_user}" ]; then
+    log_err "A username for a user on the new system is not set!"
+    log_err "Set it with \"export target_user=<username>\""
 fi
 
-# ${1} == username
-username="${1}"
+username="${target_user}"
 
 cmd_do useradd -m -s /bin/bash ${username}
 echo ""

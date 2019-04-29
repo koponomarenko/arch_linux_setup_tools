@@ -24,6 +24,8 @@ pkgs=(
 )
 
 install_pkgs "${pkgs[@]}"
+
+mk_dest_config_dir ${config_dir}/sway
 copy_config_file "${config_dir}/sway/config" "${user_config_dir}/sway/config"
 
 # Configure swaylock

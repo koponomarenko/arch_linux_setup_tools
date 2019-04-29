@@ -2,7 +2,42 @@
 
 A set of scripts and configs to help with installation and configuration of Arch Linux
 
+---
+## Installation details
+
+- x86_64 CPU
+- Intel CPU and Intel IGP (integrated graphics).
+- UEFI boot mode
+- Only one system disk.
+- GPT for the system disk
+- No shared OS on this hardware - only one OS.
+- Only US English locale is used.
+- init system: systemd
+- boot loader: GRUB
+- One user account
+
+---
+## Set up tips
+
+Options are set using environment variables.
+
+`set_environment.sh` - sets a minimum needed environment for those tools to work.
+
+`prepare.sh` - generates high level scripts.
+
+To print all packages without installing them, set `export print_pkgs=yes`.
+
+---
 ## Some useful tips for a day to day work
+
+### Detect xwayland users (apps)
+
+Tags: `xeyes` `xwayland`
+
+Install `xorg-xeyes` and run it using `xeyes`.
+
+Start moving a mouse over a window. If eyes are moving - then the app is using xWayland.
+
 
 ### NetworkManager
 

@@ -1,0 +1,57 @@
+
+exec mako --ignore-timeout 1
+
+for_window [class="feh"] floating enable
+for_window [class="imv"] floating enable
+
+# idle configuration
+exec swayidle -w \
+        timeout 300 'swaylock -f -c 000000' \
+        timeout 600 'swaymsg "output * dpms off"' \
+             resume 'swaymsg "output * dpms on"' \
+        before-sleep 'swaylock -f -c 000000'
+
+# input configuration
+input * {
+    xkb_layout us,ua
+    xkb_options "grp:alt_shift_toggle"
+}
+
+# screenshots
+#bindsym --release Print exec grim -g \"$(slurp)" - | wl-copy
+bindsym --release Print exec grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
+bindsym --release Shift+Print exec grim -g "$(slurp)" $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
+
+# pulse_audio_controls
+# Check the key: $ xbindkeys --key
+# Pulse Audio controls
+# Check the sink: $ pactl list sink
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# screen_brightness
+bindsym XF86MonBrightnessDown exec light -U 5
+bindsym XF86MonBrightnessUp exec light -A 5
+#bindsym XF86MonBrightnessDown exec brightnessctl set -5%
+#bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+
+# key bindings
+# example:
+#   https://faq.i3wm.org/question/239/how-do-i-suspendlockscreen-and-logout.1.html
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Pause mode "$mode_system"
+

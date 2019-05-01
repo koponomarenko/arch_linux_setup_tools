@@ -9,6 +9,8 @@ pkgs=(
     swaylock
     swayidle
 
+    fzf # needed for the termite-based "app launcher"
+
     mako # A lightweight Wayland notification daemon
 
     grim # Screenshot utility that works under Wayland

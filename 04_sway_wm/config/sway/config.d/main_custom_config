@@ -1,3 +1,4 @@
+#xwayland disable
 
 exec mako --ignore-timeout 1
 
@@ -15,6 +16,9 @@ exec swayidle -w \
 input * {
     xkb_layout us,ua
     xkb_options "grp:alt_shift_toggle"
+
+    tap enable
+    natural_scroll enabled
 }
 
 # screenshots

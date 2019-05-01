@@ -37,3 +37,5 @@ dest_file="${run_dir}/04_sway_wm.sh"
 get_all_in_dir ${dir} ${tmp_file}
 finalize_script ${dir} ${tmp_file} ${dest_file}
 
+sed -i -e '/install_and_configure_sway/a\' -e "${hw_dir}/configure_output_for_sway.sh" \
+    ${dest_file}

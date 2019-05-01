@@ -25,6 +25,8 @@ Options are set using environment variables.
 
 `prepare.sh` - generates high level scripts.
 
+Use `sudo -E <script>` to run the script with root privileges and keep the environment.
+
 To print all packages without installing them, set `export print_pkgs=yes`.
 
 ### HiDPI boot

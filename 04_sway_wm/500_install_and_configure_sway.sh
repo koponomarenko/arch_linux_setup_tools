@@ -37,9 +37,9 @@ copy_config_file "${sway_wm_config_dir}/sway/config.d/main_custom_config" "${use
 mk_dest_config_dir ${user_config_dir}/swaylock
 copy_config_file "${sway_wm_config_dir}/swaylock/config" "${user_config_dir}/swaylock/config"
 mkdir -p /opt/images/
-cp images/* /opt/images/.
+cp ${root_dir}/images/* /opt/images/.
 
 # Configure app launcher
 sway_app_launcher="/usr/local/bin/sway_app_launcher"
-cmd_do cp tools/sway_app_launcher ${sway_app_launcher}
+cmd_do cp ${root_dir}/tools/sway_app_launcher ${sway_app_launcher}
 cmd_do chmod +x ${sway_app_launcher}

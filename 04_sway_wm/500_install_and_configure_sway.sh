@@ -32,6 +32,7 @@ copy_config_file "${sway_wm_config_dir}/sway/config" "${user_config_dir}/sway/co
 copy_config_file "${sway_wm_config_dir}/sway/config.d/main_custom_config" "${user_config_dir}/sway/config.d/main_custom_config"
 
 # Configure swaylock
+mk_dest_config_dir ${user_config_dir}/swaylock
 copy_config_file "${sway_wm_config_dir}/swaylock/config" "${user_config_dir}/swaylock/config"
 mkdir -p /opt/images/
 cp images/* /opt/images/.

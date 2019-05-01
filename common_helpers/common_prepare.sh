@@ -18,7 +18,7 @@ fi
 get_all_in_dir() {
     local dir=${1}
     local res_file=${2}
-    find ${dir} -maxdepth 1 -type f >>${res_file}
+    find ${dir} -maxdepth 1 -type f -exec echo "{} || exit 1" \; >>${res_file}
 }
 
 finalize_script() {

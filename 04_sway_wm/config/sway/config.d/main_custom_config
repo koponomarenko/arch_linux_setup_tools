@@ -22,8 +22,8 @@ input * {
 
 # screenshots
 #bindsym --release Print exec grim -g \"$(slurp)" - | wl-copy
-bindsym --release Print exec grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
-bindsym --release Shift+Print exec grim -g "$(slurp)" $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
+bindsym --release Print exec grim $(xdg-user-dir PICTURES)/screenshot_$(date +'%Y-%m-%d_%H-%M-%S.png')
+bindsym --release Shift+Print exec grim -g "$(slurp)" $(xdg-user-dir PICTURES)/screenshot_$(date +'%Y-%m-%d_%H-%M-%S.png')
 
 # pulse_audio_controls
 # Check the key: $ xbindkeys --key

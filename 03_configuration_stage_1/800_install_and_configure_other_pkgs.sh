@@ -6,7 +6,6 @@
 pkgs=(
     # screen vs tmux?
     # tree
-    # feh
     # zathura
     # neofetch
     # gnupg

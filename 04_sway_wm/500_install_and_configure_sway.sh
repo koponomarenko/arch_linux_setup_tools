@@ -18,7 +18,6 @@ pkgs=(
 
     light # Program to easily change brightness on backlight-controllers.
 
-    feh # Fast and light imlib2-based image viewer
     imv # Wayland command line image viewer intended for use with tiling window managers
 
     pulseaudio # A featureful, general-purpose sound server.

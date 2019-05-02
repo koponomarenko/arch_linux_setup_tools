@@ -1,4 +1,4 @@
-#!/bin/bash
+ud!/bin/bash
 
 . ${root_dir}/common_helpers/functions.sh
 
@@ -10,6 +10,7 @@ fi
 username="${target_user}"
 
 cmd_do useradd -m -s /bin/bash ${username}
+su - ${username} -c /usr/bin/xdg-user-dirs-update
 echo ""
 echo "Enter a password for '${username}'"
 echo ""

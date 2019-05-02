@@ -1,4 +1,4 @@
-#xwayland disable
+xwayland disable
 
 exec mako --ignore-timeout 1
 

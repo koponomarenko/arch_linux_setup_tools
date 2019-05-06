@@ -11,6 +11,9 @@ pkgs=(
     ttf-dejavu
     ttf-ubuntu-font-family
     ttf-bitstream-vera
+
+    awesome-terminal-fonts
+    otf-font-awesome
 )
 
 install_pkgs "${pkgs[@]}"

@@ -35,8 +35,8 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # screen_brightness
-bindsym XF86MonBrightnessDown exec light -U 5
-bindsym XF86MonBrightnessUp exec light -A 5
+bindsym XF86MonBrightnessDown exec screen_brightness.sh decrease
+bindsym XF86MonBrightnessUp exec screen_brightness.sh increase
 #bindsym XF86MonBrightnessDown exec brightnessctl set -5%
 #bindsym XF86MonBrightnessUp exec brightnessctl set +5%
 

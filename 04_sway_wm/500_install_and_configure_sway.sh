@@ -6,6 +6,8 @@
 pkgs=(
     sway # Window Manager on Wayland
 
+    i3status
+
     swaylock
     swayidle
 
@@ -32,6 +34,10 @@ mk_dest_config_dir ${user_config_dir}/sway/config.d
 copy_config_file "${sway_wm_config_dir}/sway/config" "${user_config_dir}/sway/config"
 copy_config_file "${sway_wm_config_dir}/sway/config.d/main_custom_config" "${user_config_dir}/sway/config.d/main_custom_config"
 
+# Configure i3status
+mk_dest_config_dir ${user_config_dir}/i3status
+copy_config_file "${sway_wm_config_dir}/i3status/config" "${user_config_dir}/i3status/config"
+
 # Configure swaylock
 mk_dest_config_dir ${user_config_dir}/swaylock
 copy_config_file "${sway_wm_config_dir}/swaylock/config" "${user_config_dir}/swaylock/config"
@@ -42,3 +48,8 @@ cp ${root_dir}/images/* /opt/images/.
 sway_app_launcher="/usr/local/bin/sway_app_launcher"
 cmd_do cp ${root_dir}/tools/sway_app_launcher ${sway_app_launcher}
 cmd_do chmod +x ${sway_app_launcher}
+
+# Configure screen_brightness.sh
+screen_brightness="/usr/local/bin/screen_brightness.sh"
+cmd_do cp ${root_dir}/tools/screen_brightness.sh ${screen_brightness}
+cmd_do chmod +x ${screen_brightness}

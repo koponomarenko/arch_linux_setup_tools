@@ -5,11 +5,11 @@
 
 pkgs=(
     # screen vs tmux?
-    # tree
+    tree
     # zathura
-    # neofetch
+    neofetch
     # gnupg
-    # ranger
+    ranger
 )
 
 install_pkgs "${pkgs[@]}"

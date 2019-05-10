@@ -6,6 +6,9 @@
 pkgs=(
     ttf-liberation # default
     noto-fonts # Google font family, fallback fonts
+    noto-fonts-extra
+    noto-fonts-cjk
+    noto-fonts-emoji
 
     ttf-roboto
     ttf-dejavu

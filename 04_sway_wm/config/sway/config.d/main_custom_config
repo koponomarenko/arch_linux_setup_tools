@@ -1,5 +1,7 @@
 xwayland disable
 
+for_window [app_id=".*"] inhibit_idle fullscreen
+
 # Floating mode terminal
 set $term_float exec $term --name=terminal_floating
 for_window [app_id="^terminal_floating$"] floating enable, resize set width 800 px height 600 px

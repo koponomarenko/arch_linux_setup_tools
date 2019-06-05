@@ -89,6 +89,18 @@ Show available networks and connect
 
 An alternative is `nmtui` - Text User Interface for controlling NetworkManager.
 
+### nmcli and WiFi wpa2 enterprise
+
+    nmcli con add type wifi ifname IFNAME con-name CONNECTION_NAME ssid SSID
+    nmcli con edit id CONNECTION_NAME
+    nmcli> set 802-1x.eap peap
+    nmcli> set 802-1x.phase2-auth mschapv2
+    nmcli> set wifi-sec.key-mgmt wpa-eap
+    nmcli> set 802-1x.identity USERNAME
+    nmcli> save
+    nmcli> quit
+    nmcli -a con up CONNECTION_NAME
+
 ### Sound/audio control
 
 Tags: `sound` `audio` `volume` `pulseaudio`

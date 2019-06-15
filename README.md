@@ -52,13 +52,10 @@ Then start dhcpcd for the interface
 
     curl -L https://github.com/koponomarenko/arch_linux_setup_tools/archive/master.tar.gz | tar zx
 
-### logitech mx anywhere 2s
+### bluetoothctl
 
-Don't forget to start `bluetoothctl` with `sudo`.
-
-### logitech k810
-
-Use `0000` passkey if requested.
+Don't forget to start `bluetoothctl` with `sudo`.  
+Try `NoInputNoOutput` agent to eliminate request of any pass codes when pairing.
 
 ---
 ## Some useful tips for a day to day work

@@ -52,6 +52,21 @@ Then start dhcpcd for the interface
 
     curl -L https://github.com/koponomarenko/arch_linux_setup_tools/archive/master.tar.gz | tar zx
 
+## Manual settings
+
+### HiDPI
+
+Add the lines belows to `/etc/default/grub`:
+
+    GRUB_CMDLINE_LINUX="video=1280x720"
+    GRUB_GFXMODE=1280x720x32,1280x1024x32,auto
+    # Comment out this one
+    #GRUB_GFXPAYLOAD_LINUX=keep
+
+Generate the updated GRUB config:
+
+    sudo grub-mkconfig -o /boot/grub/grub.cfg
+
 ### bluetoothctl
 
 Don't forget to start `bluetoothctl` with `sudo`.  

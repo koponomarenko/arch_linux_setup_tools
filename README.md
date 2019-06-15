@@ -52,6 +52,7 @@ Then start dhcpcd for the interface
 
     curl -L https://github.com/koponomarenko/arch_linux_setup_tools/archive/master.tar.gz | tar zx
 
+---
 ## Manual settings
 
 ### HiDPI

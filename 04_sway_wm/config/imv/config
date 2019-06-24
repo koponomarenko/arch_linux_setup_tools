@@ -1,0 +1,10 @@
+[options]
+scaling_mode = none
+#overlay = true
+overlay_font = Monospace:14
+
+[aliases]
+o = open ~/Pictures/*
+z = zoom actual
+c = center
+q = quit

@@ -12,7 +12,7 @@ bindsym $mod+Shift+Return exec $term_float
 
 exec mako
 
-for_window [app_id="imv"] floating enable
+for_window [app_id="^imv$"] floating enable, border normal
 
 # idle configuration
 exec swayidle -w \

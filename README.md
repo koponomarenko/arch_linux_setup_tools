@@ -73,6 +73,15 @@ Generate the updated GRUB config:
 Don't forget to start `bluetoothctl` with `sudo`.  
 Try `NoInputNoOutput` agent to eliminate request of any pass codes when pairing.
 
+### Network Manager
+
+#### Disable MAC randomization
+
+    sudo vim /etc/NetworkManager/conf.d/wifi_rand_mac.conf
+    
+    [device]
+    wifi.scan-rand-mac-address=no
+
 ---
 ## Some useful tips for a day to day work
 

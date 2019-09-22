@@ -1,13 +1,14 @@
 xwayland disable
 
+for_window [app_id=".*"] border normal 1px
+
 for_window [app_id=".*"] inhibit_idle fullscreen
 
 bindsym $mod+Tab workspace back_and_forth
 
 # Floating mode terminal
 set $term_float exec $term --name=terminal_floating
-for_window [app_id="^terminal_floating$"] floating enable, resize set width 800 px height 600 px
-
+for_window [app_id="^terminal_floating$"] floating enable, resize set width 600 px height 400 px
 bindsym $mod+Shift+Return exec $term_float
 
 exec mako
@@ -53,7 +54,7 @@ bindsym XF86MonBrightnessUp exec screen_brightness.sh increase
 # key bindings
 # example:
 #   https://faq.i3wm.org/question/239/how-do-i-suspendlockscreen-and-logout.1.html
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+set $mode_system System: (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id swaylock, mode "default"
     #bindsym e exec --no-startup-id logout, mode "default"

@@ -15,4 +15,4 @@ cmd_do cp ${root_dir}/tools/screen_brightness.sh ${screen_brightness}
 cmd_do chmod +x ${screen_brightness}
 
 # Give permissions to "light"
-#setcap cap_dac_override+eip /usr/bin/light
+setcap cap_dac_override+eip /usr/bin/light

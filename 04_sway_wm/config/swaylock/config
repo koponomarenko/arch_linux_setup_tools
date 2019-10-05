@@ -1,3 +1,3 @@
 show-failed-attempts
 daemonize
-image=/opt/images/lock_screen_image.jpg
+image=/usr/local/share/backgrounds/custom/lock_screen_image.jpg

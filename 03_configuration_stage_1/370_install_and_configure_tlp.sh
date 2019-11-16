@@ -14,7 +14,6 @@ systemctl enable tlp.service
 systemctl start tlp.service
 
 systemctl enable tlp-sleep.service
-systemctl start tlp-sleep.service
 
 systemctl enable NetworkManager-dispatcher.service
 

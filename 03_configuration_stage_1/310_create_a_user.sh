@@ -1,4 +1,4 @@
-ud!/bin/bash
+#!/bin/bash
 
 . ${root_dir}/common_helpers/functions.sh
 

@@ -68,6 +68,21 @@ Generate the updated GRUB config:
 
     sudo grub-mkconfig -o /boot/grub/grub.cfg
 
+### Power management
+
+Add this kernel parameter (in bootloader) for STR(S3):
+
+    mem_sleep_default=deep
+
+#### logind suspend delay
+
+Delayed lid switch action should be set to 0.
+
+    /etc/systemd/logind.conf
+    ...
+    HoldoffTimeoutSec=30s
+    ...
+
 ### bluetoothctl
 
 Don't forget to start `bluetoothctl` with `sudo`.  

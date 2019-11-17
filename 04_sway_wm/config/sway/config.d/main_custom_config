@@ -1,7 +1,6 @@
 xwayland disable
 
 for_window [app_id=".*"] border normal 1px
-
 for_window [app_id=".*"] inhibit_idle fullscreen
 
 bindsym $mod+Tab workspace back_and_forth
@@ -18,10 +17,11 @@ for_window [app_id="^imv$"] floating enable, border normal
 # idle configuration
 exec swayidle -w \
         timeout 135 'swaymsg "output * dpms off"' \
+             resume 'swaymsg "output * dpms on"' \
         timeout 300 'swaylock -f -c 000000' \
         timeout 600 'systemctl suspend' \
-             resume 'swaymsg "output * dpms on"' \
-        before-sleep 'swaylock -f -c 000000'
+        before-sleep 'swaylock -f -c 000000' \
+        after-resume 'swaymsg "output * dpms on"'
 
 # input configuration
 input * {
@@ -31,6 +31,10 @@ input * {
     tap enable
     natural_scroll enabled
 }
+
+#set $opacity 0.
+#for_window [class=".*"] opacity $opacity
+#for_window [app_id=".*"] opacity $opacity
 
 # screenshots
 #bindsym --release Print exec grim -g \"$(slurp)" - | wl-copy

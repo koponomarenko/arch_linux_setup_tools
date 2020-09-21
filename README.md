@@ -158,3 +158,13 @@ or
 
     grip <file_name>
 
+### Java
+
+Android Studio
+```
+if you are facing the floating menu issue the fastest way for me was to open Android Studio 4.0+
+Then Help > Open Custom VM Options
+And add this line as suggested above:
+
+-Djbre.popupwindow.settype=false
+```

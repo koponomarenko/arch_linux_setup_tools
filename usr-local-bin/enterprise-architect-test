@@ -1,0 +1,3 @@
+#!/bin/sh
+cd ~/.wine_ea/drive_c/Program\ Files/Sparx\ Systems/EA
+DXVK_HUD=1 WINEARCH=win32 WINEPREFIX=~/.wine_ea exec /usr/bin/wine "c:\Program Files\Sparx Systems\EA\EA.exe"

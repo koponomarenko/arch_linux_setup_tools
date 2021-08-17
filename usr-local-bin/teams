@@ -1,0 +1,2 @@
+#!/bin/bash
+exec /usr/bin/teams --enable-features=UseOzonePlatform --ozone-platform=wayland "$@"

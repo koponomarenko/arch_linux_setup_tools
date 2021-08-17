@@ -1,0 +1,2 @@
+#!/bin/sh
+QT_WAYLAND_DISABLE_WINDOWDECORATION=1 QT_QPA_PLATFORM=wayland exec /usr/bin/qtcreator "$@"

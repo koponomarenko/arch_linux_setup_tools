@@ -1,0 +1,3 @@
+#!/bin/bash
+# pacman -Ql pulse-secure
+exec /opt/pulsesecure/bin/pulseUI "$@"

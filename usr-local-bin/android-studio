@@ -1,0 +1,2 @@
+#!/bin/bash
+QT_QPA_PLATFORM=xcb _JAVA_AWT_WM_NONREPARENTING=1 exec /usr/bin/android-studio "$@"

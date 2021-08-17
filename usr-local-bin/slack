@@ -1,0 +1,4 @@
+#!/bin/bash
+#exec /usr/bin/slack
+exec /usr/bin/slack --enable-features=UseOzonePlatform --ozone-platform=wayland "$@"
+#exec /usr/bin/slack --enable-features=UseOzonePlatform --enable-features=WebRTCPipeWireCapturer --ozone-platform=wayland "$@"

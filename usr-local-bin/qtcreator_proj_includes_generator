@@ -1,0 +1,128 @@
+#!/bin/bash
+version_tag="2.0"
+
+show_help() {
+    cat >&2 <<EOF
+
+This tool works in two modes:
+    - takes a file with build output as a positional parameter;
+    - takes build output from the piped stdout;
+
+Expected flow, or how-to use this tool:
+
+    1. Change directory to the project directory with Android.{bp,mk}.
+    2. Temporarily add "-v" option to "cflags" of the desired build target in
+       Android.{bp,mk} to turn on the verbose mode during build.
+    3. Force to build all files in the project:
+        $ find . -type f -exec touch {} +
+    4. Get include paths:
+        $ mm | <this_tool>
+EOF
+}
+
+################################################################################
+#   Check parameters
+################################################################################
+version_key="--version"
+if [ "$#" -eq "1" ] && [ "${1}" == "${version_key}" ]; then
+    echo "${version_tag}" && exit 0
+fi
+
+if [ -n "${1}" ]; then
+    # if there is an argument, read from $1
+    input="${1}"
+    [ ! -f "${input}" ] && \
+        { echo "ERROR: '${input}' file doesn't exist" >&2; show_help && exit 1; }
+elif [ ! -t 0 ]; then
+    # if stdin is not open on the terminal (it's piped), read from stdin (pipe)
+    input="-"
+else
+    # No data provided ...
+    echo "ERROR: no data provided" >&2; show_help && exit 1
+fi
+
+################################################################################
+#   Check environment
+################################################################################
+[ -n "$ANDROID_BUILD_TOP" ] || \
+    { echo "ERROR: \$ANDROID_BUILD_TOP variable is not set" >&2; exit 1; }
+
+################################################################################
+#   Set environment
+################################################################################
+token_start="include <...> search starts here:"
+token_end="End of search list."
+
+################################################################################
+#   Tool version check
+################################################################################
+version_lt() {
+    [ "$1" == "$2" ] && return 1
+    [  "$1" == "$(echo -e "$1\n$2" | sort -V | head -n1)" ]
+}
+check_tool_version() {
+    local orig_tool="${ANDROID_BUILD_TOP}/vendor/meaa/devtools-config"
+    orig_tool="${orig_tool}/ide-common/qtcreator_proj_includes_generator.sh"
+    local this_tool="$(realpath $0)"
+
+    if [ -x "${orig_tool}" ]; then
+        local orig_version=$("${orig_tool}" ${version_key})
+        local this_version=$("${this_tool}" ${version_key})
+        if version_lt ${this_version} ${orig_version}; then
+            cat <<EOF
+
+--------------------------------------
+NEW VERSION OF THIS TOOL
+--------------------------------------
+This tool version: ${this_version}
+New tool version: ${orig_version}
+New tool:
+${orig_tool}
+EOF
+        fi
+    fi
+}
+
+################################################################################
+#   Figure out the correct relative path prefix
+################################################################################
+rel_path_prefix=""
+create_rel_path_prefix() {
+    root_dir="${ANDROID_BUILD_TOP}"
+    dir="$(pwd)"
+    # 1..30 - is a sane possible number of parent directories
+    for i in {1..30}; do
+    #echo i = $i
+    #echo dir: $dir
+    if [ "$root_dir" == "$dir" ]; then
+        break
+    else
+        rel_path_prefix="../${rel_path_prefix}"
+    fi
+
+    pushd ${dir}/.. >/dev/null
+    dir=$(pwd)
+    popd >/dev/null
+    done
+}
+create_rel_path_prefix
+
+################################################################################
+#   Get include paths
+################################################################################
+out="$(cat ${input} |
+    sed -n "/${token_start}/,/${token_end}/p" |  # extract lines between the tokens
+    awk '!seen[$0]++' |  # remove duplicates
+    sed "/${token_start}/d" |  # remove token_start
+    sed "/${token_end}/d" |  # remove token_end
+    sed 's/^[ \t]*//' |  # remove empty space at the beginning of the path
+    sed "s|^|${rel_path_prefix}|" )" # append relative path prefix
+
+if [ -n "${out}" ]; then
+    echo "$out"
+else
+    echo "ERROR: no matching files in the list. Verbose ON, force rebuild?" >&2
+    show_help && exit 1
+fi
+
+check_tool_version
